@@ -224,14 +224,18 @@ body {
   filter: drop-shadow(0 0 12px rgba(255, 200, 50, 0.5));
 }
 
+
+
+/* --- Swaying Pendants Animations (Anchored precisely at chain top) --- */
 .forehead-pendant {
-  transform-origin: 130px 52px;
-  animation: foreheadSway 4s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: foreheadSway 3.6s ease-in-out infinite alternate;
 }
 
-/* Swaying Pendants Animations */
 .swaying-pendant {
   transform-box: fill-box;
+  transform-origin: 50% 0%;
 }
 
 .pendant-1 {
@@ -256,7 +260,15 @@ body {
 }
 
 @keyframes foreheadSway {
-  0% { transform: rotate(-2deg); }
+  0% { transform: rotate(-2.5deg); }
+  100% { transform: rotate(2.5deg); }
+}
+}
+
+@keyframes foreheadSway {
+  0% { transform: rotate(-2.5deg); }
+  100% { transform: rotate(2.5deg); }
+}
   100% { transform: rotate(2deg); }
 }
 
