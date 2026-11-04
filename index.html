@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✦ Fenix ✦ | Celestial Bio & Portfolio</title>
+  <meta name="description" content="Personal bio & portfolio of Fenix (MonkeyDLuffy-Nika) — Game Modder, Reverse Engineer, Discord Automation & CC:Tweaked Systems.">
+  <link rel="icon" type="image/png" href="assets/avatar.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Particle Stars Canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Ambient Golden Glow Nebulas -->
+  <div class="nebula nebula-top"></div>
+  <div class="nebula nebula-bottom"></div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <span class="sparkle">✦</span>
+        <span class="logo-text">FENIX</span>
+        <span class="sparkle">✦</span>
+      </div>
+      <div class="header-actions">
+        <button id="lang-toggle" class="lang-btn" aria-label="Toggle language">
+          <i class="fa-solid fa-globe"></i>
+          <span id="lang-label">EN</span>
+        </button>
+        <a href="https://github.com/MonkeyDLuffy-Nika" target="_blank" rel="noopener noreferrer" class="gh-link-btn" title="GitHub Profile">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+    <!-- Celestial Hero Section -->
+    <section class="hero-section">
+      <!-- Stained Glass Celestial Crown / Arch -->
+      <div class="celestial-arch-container">
+        <svg class="celestial-arch" viewBox="0 0 600 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fff0aa"/>
+              <stop offset="35%" stop-color="#ffd166"/>
+              <stop offset="70%" stop-color="#f4a261"/>
+              <stop offset="100%" stop-color="#e76f51"/>
+            </linearGradient>
+            <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255, 235, 180, 0.85)"/>
+              <stop offset="100%" stop-color="rgba(255, 170, 50, 0.25)"/>
+            </linearGradient>
+            <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+          </defs>
+          <!-- Ornate Outer Arch -->
+          <path d="M 50 150 Q 300 10 550 150" stroke="url(#goldGrad)" stroke-width="2.5" fill="none" filter="url(#goldGlow)"/>
+          <path d="M 80 150 Q 300 35 520 150" stroke="url(#goldGrad)" stroke-width="1.2" stroke-dasharray="4 4" fill="none"/>
+          
+          <!-- Stained Glass Shards Inside Arch -->
+          <path d="M 240 70 L 300 25 L 360 70 L 300 115 Z" fill="url(#crystalGrad)" stroke="url(#goldGrad)" stroke-width="1.5"/>
+          <path d="M 180 90 L 235 72 L 255 118 L 195 130 Z" fill="url(#crystalGrad)" stroke="url(#goldGrad)" stroke-width="1.2"/>
+          <path d="M 420 90 L 365 72 L 345 118 L 405 130 Z" fill="url(#crystalGrad)" stroke="url(#goldGrad)" stroke-width="1.2"/>
+          
+          <!-- Celestial Sun / Star in Center -->
+          <circle cx="300" cy="70" r="14" fill="url(#goldGrad)"/>
+          <circle cx="300" cy="70" r="22" stroke="url(#goldGrad)" stroke-width="1" stroke-dasharray="2 3"/>
+          
+          <!-- Radiating Crystal Rays -->
+          <line x1="300" y1="42" x2="300" y2="12" stroke="url(#goldGrad)" stroke-width="2.5" filter="url(#goldGlow)"/>
+          <line x1="270" y1="52" x2="245" y2="30" stroke="url(#goldGrad)" stroke-width="1.8"/>
+          <line x1="330" y1="52" x2="355" y2="30" stroke="url(#goldGrad)" stroke-width="1.8"/>
+          <line x1="250" y1="70" x2="215" y2="70" stroke="url(#goldGrad)" stroke-width="1.8"/>
+          <line x1="350" y1="70" x2="385" y2="70" stroke="url(#goldGrad)" stroke-width="1.8"/>
+
+          <!-- Hanging Pearl Beads -->
+          <circle cx="160" cy="140" r="3.5" fill="#fff5d0"/>
+          <circle cx="230" cy="120" r="3" fill="#fff5d0"/>
+          <circle cx="300" cy="122" r="4" fill="#fff5d0"/>
+          <circle cx="370" cy="120" r="3" fill="#fff5d0"/>
+          <circle cx="440" cy="140" r="3.5" fill="#fff5d0"/>
+        </svg>
+      </div>
+
+      <!-- Avatar & Halo Container -->
+      <div class="avatar-wrapper">
+        <div class="celestial-halo"></div>
+        <div class="avatar-frame">
+          <img src="assets/avatar.png" alt="Fenix Avatar" class="avatar-img" id="avatar">
+          <div class="status-indicator" title="Online in Spirit"></div>
+        </div>
+      </div>
+
+      <!-- Persona Name & Badges -->
+      <div class="profile-info">
+        <div class="name-flourish">
+          <span class="wing-left">꧁ ༻</span>
+          <h1 class="persona-name">FENIX</h1>
+          <span class="wing-right">༺ ꧂</span>
+        </div>
+        
+        <p class="tagline">⚡ 𝓩. ~ 𝓩. ~ 𝓩. 🐍 🩵 &gt;ω&lt;</p>
+
+        <!-- Discord-style speech status bubble -->
+        <div class="speech-status">
+          <span class="speech-emoji">🥺</span>
+          <span class="speech-text" data-i18n="speech_status">Gun hit не работает</span>
+        </div>
+
+        <p class="role-desc" data-i18n="hero_role">
+          Game Modder &bull; Reverse Engineer &bull; CC:Tweaked Architect &bull; Discord Automation
+        </p>
+
+        <!-- Social / Action Buttons -->
+        <div class="social-actions">
+          <button class="action-card discord-copy-btn" id="copy-discord" title="Click to copy Discord">
+            <div class="action-icon discord-icon">
+              <i class="fa-brands fa-discord"></i>
+            </div>
+            <div class="action-meta">
+              <span class="action-label" data-i18n="discord_label">DISCORD (КЛИК ДЛЯ КОПИРОВАНИЯ)</span>
+              <span class="action-value">username999gl</span>
+            </div>
+            <i class="fa-regular fa-copy copy-hint-icon"></i>
+          </button>
+
+          <a href="https://github.com/MonkeyDLuffy-Nika" target="_blank" rel="noopener noreferrer" class="action-card github-card" title="Open GitHub Profile">
+            <div class="action-icon github-icon">
+              <i class="fa-brands fa-github"></i>
+            </div>
+            <div class="action-meta">
+              <span class="action-label" data-i18n="github_label">GITHUB АККАУНТ</span>
+              <span class="action-value">MonkeyDLuffy-Nika</span>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square external-hint-icon"></i>
+          </a>
+
+          <a href="https://t.me/A1ntigravityBOTbot" target="_blank" rel="noopener noreferrer" class="action-card tg-card" title="Open Telegram">
+            <div class="action-icon tg-icon">
+              <i class="fa-brands fa-telegram"></i>
+            </div>
+            <div class="action-meta">
+              <span class="action-label" data-i18n="tg_label">СВЯЗЬ / TELEGRAM</span>
+              <span class="action-value">Telegram Bot</span>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square external-hint-icon"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills & Technologies Arsenal -->
+    <section class="section skills-section">
+      <div class="section-title-wrap">
+        <span class="section-sparkle">✦</span>
+        <h2 class="section-title" data-i18n="tech_title">Арсенал технологий</h2>
+        <span class="section-sparkle">✦</span>
+      </div>
+      <p class="section-subtitle" data-i18n="tech_subtitle">Инструменты реверс-инжиниринга, разработки модификаций и автоматизации</p>
+
+      <div class="tech-grid">
+        <div class="tech-badge"><i class="fa-brands fa-python"></i> <span>Python</span></div>
+        <div class="tech-badge"><i class="fa-solid fa-code"></i> <span>C# / .NET</span></div>
+        <div class="tech-badge"><i class="fa-brands fa-js"></i> <span>TypeScript</span></div>
+        <div class="tech-badge"><i class="fa-solid fa-moon"></i> <span>Lua (CC:Tweaked)</span></div>
+        <div class="tech-badge"><i class="fa-brands fa-square-js"></i> <span>JavaScript</span></div>
+        <div class="tech-badge"><i class="fa-solid fa-microchip"></i> <span>C++ / ASM</span></div>
+        <div class="tech-badge"><i class="fa-solid fa-terminal"></i> <span>PowerShell</span></div>
+        <div class="tech-badge"><i class="fa-solid fa-scroll"></i> <span>WitcherScript</span></div>
+        <div class="tech-badge"><i class="fa-solid fa-gears"></i> <span>BepInEx & Harmony</span></div>
+        <div class="tech-badge"><i class="fa-solid fa-cube"></i> <span>ComputerCraft OS</span></div>
+        <div class="tech-badge"><i class="fa-brands fa-discord"></i> <span>Vencord Plugins</span></div>
+        <div class="tech-badge"><i class="fa-solid fa-shield-halved"></i> <span>Binary Patching</span></div>
+      </div>
+    </section>
+
+    <!-- Projects Showcase Section -->
+    <section class="section projects-section">
+      <div class="section-title-wrap">
+        <span class="section-sparkle">✦</span>
+        <h2 class="section-title" data-i18n="projects_title">Избранные проекты</h2>
+        <span class="section-sparkle">✦</span>
+      </div>
+      <p class="section-subtitle" data-i18n="projects_subtitle">Все проекты открыты и защищены строгой лицензией GNU General Public License v3</p>
+
+      <!-- Category Filter Pills -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Все проекты (8)</button>
+        <button class="filter-btn" data-filter="modding" data-i18n="filter_modding">Игровой моддинг</button>
+        <button class="filter-btn" data-filter="automation" data-i18n="filter_automation">Автоматизация & Discord</button>
+        <button class="filter-btn" data-filter="systems" data-i18n="filter_systems">Виртуальные системы & CC</button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projects-grid">
+        <!-- 1. Witcher 3 Cheat Panel -->
+        <article class="project-card" data-category="modding">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-paw"></i></div>
+            <div class="card-tags">
+              <span class="tag tag-gold">WitcherScript</span>
+              <span class="tag tag-blue">Next-Gen & Classic</span>
+              <span class="tag tag-license">GPL v3</span>
+            </div>
+          </div>
+          <h3 class="card-title">Witcher 3: Cheat Panel & Settings</h3>
+          <p class="card-desc" data-i18n="p_witcher_desc">
+            Глубокая панель читов в главном меню игры (11 категорий): круговые 360° знаки, синхронная активация всех 12 мутаций, залповый веер бомб и метеоритный огонь.
+          </p>
+          <div class="card-footer">
+            <a href="https://github.com/MonkeyDLuffy-Nika/witcher3-cheat-panel" target="_blank" rel="noopener noreferrer" class="repo-btn">
+              <i class="fa-brands fa-github"></i>
+              <span data-i18n="view_github">Репозиторий</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 2. The Planet Crafter Host Panel -->
+        <article class="project-card" data-category="modding">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-planet-ringed"></i></div>
+            <div class="card-tags">
+              <span class="tag tag-gold">C# / .NET</span>
+              <span class="tag tag-blue">BepInEx 5</span>
+              <span class="tag tag-license">GPL v3</span>
+            </div>
+          </div>
+          <h3 class="card-title">Planet Crafter: Host Panel GUI</h3>
+          <p class="card-desc" data-i18n="p_planet_desc">
+            Интерактивный оверлей хоста на Unity/Harmony: полное бессмертие, спавн предметов, мгновенный разгон биомассы, тепла, давления и начисление Terra Tokens.
+          </p>
+          <div class="card-footer">
+            <a href="https://github.com/MonkeyDLuffy-Nika/planet-crafter-host-panel" target="_blank" rel="noopener noreferrer" class="repo-btn">
+              <i class="fa-brands fa-github"></i>
+              <span data-i18n="view_github">Репозиторий</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 3. Discord Auto-Messenger Desktop -->
+        <article class="project-card" data-category="automation">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-paper-plane"></i></div>
+            <div class="card-tags">
+              <span class="tag tag-gold">Python</span>
+              <span class="tag tag-blue">CustomTkinter</span>
+              <span class="tag tag-license">GPL v3</span>
+            </div>
+          </div>
+          <h3 class="card-title">Discord Auto-Messenger Desktop</h3>
+          <p class="card-desc" data-i18n="p_discord_desc">
+            Современный десктопный клиент для автоматизации отправки сообщений, триггера нативных Slash-команд ботов (Nekotina, Mudae), шаблонов Spintax и выбора каналов.
+          </p>
+          <div class="card-footer">
+            <a href="https://github.com/MonkeyDLuffy-Nika/discord-auto-messenger" target="_blank" rel="noopener noreferrer" class="repo-btn">
+              <i class="fa-brands fa-github"></i>
+              <span data-i18n="view_github">Репозиторий</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 4. Vencord Plugins Suite -->
+        <article class="project-card" data-category="automation">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div class="card-tags">
+              <span class="tag tag-gold">TypeScript</span>
+              <span class="tag tag-blue">Vencord</span>
+              <span class="tag tag-license">GPL v3</span>
+            </div>
+          </div>
+          <h3 class="card-title">Vencord Plugins: Animefy & Smart Text</h3>
+          <p class="card-desc" data-i18n="p_vencord_desc">
+            Комплект кастомных плагинов для Vencord: стилизатор шрифтов Animefy и текстовый макро-экспандер Smart Text с готовыми инжекторами в один клик.
+          </p>
+          <div class="card-footer">
+            <a href="https://github.com/MonkeyDLuffy-Nika/vencord-plugins-suite" target="_blank" rel="noopener noreferrer" class="repo-btn">
+              <i class="fa-brands fa-github"></i>
+              <span data-i18n="view_github">Репозиторий</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 5. ComputerCraft Mega Suite -->
+        <article class="project-card" data-category="systems">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-desktop"></i></div>
+            <div class="card-tags">
+              <span class="tag tag-gold">Lua</span>
+              <span class="tag tag-blue">CC:Tweaked</span>
+              <span class="tag tag-license">GPL v3</span>
+            </div>
+          </div>
+          <h3 class="card-title">ComputerCraft Mega Suite</h3>
+          <p class="card-desc" data-i18n="p_cc_desc">
+            Масштабная экосистема для виртуальных компьютеров: оконный менеджер Hub OS, 24+ аркадные игры, видео/аудио плееры DFPWM и мониторинг хранилищ Applied Energistics 2.
+          </p>
+          <div class="card-footer">
+            <a href="https://github.com/MonkeyDLuffy-Nika/computercraft-mega-suite" target="_blank" rel="noopener noreferrer" class="repo-btn">
+              <i class="fa-brands fa-github"></i>
+              <span data-i18n="view_github">Репозиторий</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 6. Fallout Shelter Pip-Boy Console -->
+        <article class="project-card" data-category="modding">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-radiation"></i></div>
+            <div class="card-tags">
+              <span class="tag tag-gold">Python</span>
+              <span class="tag tag-blue">AES-256 Crypto</span>
+              <span class="tag tag-license">GPL v3</span>
+            </div>
+          </div>
+          <h3 class="card-title">Fallout Shelter Pip-Boy Console</h3>
+          <p class="card-desc" data-i18n="p_pipboy_desc">
+            Аутентичная десктопная консоль смотрителя убежища в стиле зеленого экрана Pip-Boy 3000 со встроенным декриптором и редактором сейвов AES-256.
+          </p>
+          <div class="card-footer">
+            <a href="https://github.com/MonkeyDLuffy-Nika/fallout-shelter-admin-pipboy" target="_blank" rel="noopener noreferrer" class="repo-btn">
+              <i class="fa-brands fa-github"></i>
+              <span data-i18n="view_github">Репозиторий</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 7. Cuphead Mobile Rapidfire Mod -->
+        <article class="project-card" data-category="modding">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
+            <div class="card-tags">
+              <span class="tag tag-gold">JavaScript / Construct</span>
+              <span class="tag tag-blue">Event Tree Patch</span>
+              <span class="tag tag-license">GPL v3</span>
+            </div>
+          </div>
+          <h3 class="card-title">Cuphead Mobile Rapidfire Mod</h3>
+          <p class="card-desc" data-i18n="p_cuphead_desc">
+            Патчер деревьев событий движка Construct: разгон темпа стрельбы до лимита тиков, разблокировка скрытых фаз боссов и оптимизация для мобильных устройств.
+          </p>
+          <div class="card-footer">
+            <a href="https://github.com/MonkeyDLuffy-Nika/cuphead-mobile-rapidfire-mod" target="_blank" rel="noopener noreferrer" class="repo-btn">
+              <i class="fa-brands fa-github"></i>
+              <span data-i18n="view_github">Репозиторий</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- 8. Zombie Catchers 40-Zombies Mod -->
+        <article class="project-card" data-category="modding">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid fa-skull"></i></div>
+            <div class="card-tags">
+              <span class="tag tag-gold">ARM Disassembly</span>
+              <span class="tag tag-blue">Binary Patching</span>
+              <span class="tag tag-license">GPL v3</span>
+            </div>
+          </div>
+          <h3 class="card-title">Zombie Catchers 40-Zombies Mod</h3>
+          <p class="card-desc" data-i18n="p_zombie_desc">
+            Бинарный патч библиотеки libcocos2dcpp.so: увеличение спавна зомби на охоте с 4-6 до 40 целей одновременно и снятие внутриигровых таймеров.
+          </p>
+          <div class="card-footer">
+            <a href="https://github.com/MonkeyDLuffy-Nika/zombie-catchers-40zombies-mod" target="_blank" rel="noopener noreferrer" class="repo-btn">
+              <i class="fa-brands fa-github"></i>
+              <span data-i18n="view_github">Репозиторий</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-ornament">✦ ✦ ✦</div>
+      <p class="footer-copy">
+        Crafted with celestial amber &bull; <strong>✦ Fenix ✦</strong> (MonkeyDLuffy-Nika)
+      </p>
+      <p class="footer-license" data-i18n="footer_license">
+        Все открытые проекты защищены лицензией <strong>GNU General Public License v3.0</strong>.
+      </p>
+    </footer>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-msg">Discord скопирован: username999gl!</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
