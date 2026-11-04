@@ -78,7 +78,7 @@ const canvas = document.getElementById("particles-canvas");
 const ctx = canvas.getContext("2d");
 
 let particles = [];
-let mouse = { x: null, y: null, radius: 120 };
+let mouse = { x: null, y: null, radius: 140 };
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
@@ -100,13 +100,13 @@ class Particle {
   constructor() {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 0.6;
+    this.size = Math.random() * 2.2 + 0.8;
     this.baseSize = this.size;
-    this.speedX = (Math.random() - 0.5) * 0.35;
-    this.speedY = (Math.random() - 0.5) * 0.35;
-    this.opacity = Math.random() * 0.7 + 0.2;
+    this.speedX = (Math.random() - 0.5) * 0.4;
+    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.opacity = Math.random() * 0.7 + 0.3;
     this.goldShade = Math.random() > 0.4 ? "#ffd166" : (Math.random() > 0.5 ? "#f4a261" : "#fff5d0");
-    this.pulseSpeed = Math.random() * 0.02 + 0.005;
+    this.pulseSpeed = Math.random() * 0.025 + 0.008;
     this.pulseAngle = Math.random() * Math.PI * 2;
   }
 
@@ -119,20 +119,21 @@ class Particle {
     if (this.y < 0) this.y = canvas.height;
     if (this.y > canvas.height) this.y = 0;
 
-    // Twinkle
+    // Twinkle effect
     this.pulseAngle += this.pulseSpeed;
-    this.opacity = 0.3 + 0.4 * Math.sin(this.pulseAngle);
+    this.opacity = 0.35 + 0.45 * Math.sin(this.pulseAngle);
 
-    // Mouse reaction
+    // Mouse interaction: repulsion + glow
     if (mouse.x !== null && mouse.y !== null) {
       const dx = mouse.x - this.x;
       const dy = mouse.y - this.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
       if (dist < mouse.radius) {
         const force = (mouse.radius - dist) / mouse.radius;
-        this.x -= (dx / dist) * force * 2;
-        this.y -= (dy / dist) * force * 2;
-        this.size = this.baseSize * 1.5;
+        this.x -= (dx / dist) * force * 3;
+        this.y -= (dy / dist) * force * 3;
+        this.size = this.baseSize * 1.8;
+        this.opacity = 0.95;
       } else {
         this.size = this.baseSize;
       }
@@ -141,9 +142,9 @@ class Particle {
 
   draw() {
     ctx.save();
-    ctx.globalAlpha = Math.max(0.1, this.opacity);
+    ctx.globalAlpha = Math.max(0.15, this.opacity);
     ctx.fillStyle = this.goldShade;
-    ctx.shadowBlur = 8;
+    ctx.shadowBlur = 10;
     ctx.shadowColor = this.goldShade;
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -154,7 +155,7 @@ class Particle {
 
 function initParticles() {
   particles = [];
-  const count = Math.min(100, Math.floor((canvas.width * canvas.height) / 12000));
+  const count = Math.min(110, Math.floor((canvas.width * canvas.height) / 11000));
   for (let i = 0; i < count; i++) {
     particles.push(new Particle());
   }
@@ -180,10 +181,10 @@ function initCardTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -7;
-      const rotateY = ((x - centerX) / centerX) * 7;
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-5px)`;
     });
 
     card.addEventListener("mouseleave", () => {
@@ -192,7 +193,7 @@ function initCardTilt() {
   });
 }
 
-// --- Category Filtering with Smooth Staggered Transitions ---
+// --- Category Filtering ---
 function initFiltering() {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const cards = document.querySelectorAll(".project-card");
@@ -204,31 +205,14 @@ function initFiltering() {
 
       const filter = btn.getAttribute("data-filter");
 
-      cards.forEach((card, index) => {
+      cards.forEach(card => {
         const cat = card.getAttribute("data-category");
-        const shouldShow = filter === "all" || cat === filter;
-        
-        if (shouldShow) {
+        if (filter === "all" || cat === filter) {
           card.classList.remove("hidden");
-          card.style.opacity = "0";
-          card.style.transform = "translateY(15px) scale(0.97)";
-          setTimeout(() => {
-            card.style.transition = "opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)";
-            card.style.opacity = "1";
-            card.style.transform = "translateY(0) scale(1)";
-          }, index * 40);
         } else {
-          card.style.transition = "opacity 0.25s ease, transform 0.25s ease";
-          card.style.opacity = "0";
-          card.style.transform = "scale(0.95)";
-          setTimeout(() => {
-            card.classList.add("hidden");
-          }, 250);
+          card.classList.add("hidden");
         }
       });
-    });
-  });
-});
     });
   });
 }
@@ -246,6 +230,7 @@ function showToast(msg) {
 
 function initCopyDiscord() {
   const copyBtn = document.getElementById("copy-discord");
+  if (!copyBtn) return;
   copyBtn.addEventListener("click", () => {
     navigator.clipboard.writeText("username999gl").then(() => {
       const msg = translations[currentLang].toast_copied || "Discord скопирован: username999gl!";
@@ -256,12 +241,16 @@ function initCopyDiscord() {
   });
 }
 
-// --- Init Everything ---
+// --- Initialize Everything ---
 document.addEventListener("DOMContentLoaded", () => {
   setLanguage(currentLang);
-  document.getElementById("lang-toggle").addEventListener("click", () => {
-    setLanguage(currentLang === "ru" ? "en" : "ru");
-  });
+  
+  const langToggle = document.getElementById("lang-toggle");
+  if (langToggle) {
+    langToggle.addEventListener("click", () => {
+      setLanguage(currentLang === "ru" ? "en" : "ru");
+    });
+  }
 
   resizeCanvas();
   animateParticles();
