@@ -882,3 +882,78 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* --- Side Stained Glass Pillars (Discord Profile Theme) --- */
+.pillars-container {
+  position: absolute;
+  top: 15px;
+  width: 60px;
+  height: 680px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.left-pillar-wrap {
+  left: -75px;
+}
+
+.right-pillar-wrap {
+  right: -75px;
+}
+
+.celestial-pillar {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 12px rgba(255, 183, 3, 0.35));
+}
+
+.pillar-crystal {
+  transition: transform 0.4s ease;
+  animation: crystalBreathing 5s ease-in-out infinite alternate;
+}
+
+.crystal-upper {
+  animation-delay: 0.5s;
+}
+
+.crystal-lower {
+  animation-delay: 1.8s;
+}
+
+@keyframes crystalBreathing {
+  0% {
+    filter: drop-shadow(0 0 8px rgba(255, 183, 3, 0.4));
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.85));
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+.pillar-bottom-tassel {
+  animation: tasselSway 4s ease-in-out infinite alternate;
+}
+
+@keyframes tasselSway {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(0) rotate(2deg); }
+}
+
+/* Responsive adjustment: hide side pillars on narrow screens to prevent overlap */
+@media (max-width: 1180px) {
+  .left-pillar-wrap {
+    left: 5px;
+    opacity: 0.55;
+  }
+  .right-pillar-wrap {
+    right: 5px;
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 900px) {
+  .pillars-container {
+    display: none;
+  }
+}
