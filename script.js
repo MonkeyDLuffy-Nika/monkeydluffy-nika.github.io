@@ -10,7 +10,6 @@ const translations = {
     hero_role: "Game Modder • Reverse Engineer • CC:Tweaked Architect • Discord Automation",
     discord_label: "DISCORD (КЛИК ДЛЯ КОПИРОВАНИЯ)",
     github_label: "GITHUB АККАУНТ",
-    tg_label: "СВЯЗЬ / TELEGRAM",
     tech_title: "Арсенал технологий",
     tech_subtitle: "Инструменты реверс-инжиниринга, разработки модификаций и автоматизации",
     projects_title: "Избранные проекты",
@@ -36,7 +35,6 @@ const translations = {
     hero_role: "Game Modder • Reverse Engineer • CC:Tweaked Architect • Discord Automation",
     discord_label: "DISCORD (CLICK TO COPY)",
     github_label: "GITHUB ACCOUNT",
-    tg_label: "CONTACT / TELEGRAM",
     tech_title: "Tech Arsenal",
     tech_subtitle: "Reverse engineering toolchains, game modification frameworks & automation suites",
     projects_title: "Featured Projects",
@@ -194,7 +192,7 @@ function initCardTilt() {
   });
 }
 
-// --- Category Filtering ---
+// --- Category Filtering with Smooth Staggered Transitions ---
 function initFiltering() {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const cards = document.querySelectorAll(".project-card");
@@ -206,14 +204,31 @@ function initFiltering() {
 
       const filter = btn.getAttribute("data-filter");
 
-      cards.forEach(card => {
+      cards.forEach((card, index) => {
         const cat = card.getAttribute("data-category");
-        if (filter === "all" || cat === filter) {
+        const shouldShow = filter === "all" || cat === filter;
+        
+        if (shouldShow) {
           card.classList.remove("hidden");
+          card.style.opacity = "0";
+          card.style.transform = "translateY(15px) scale(0.97)";
+          setTimeout(() => {
+            card.style.transition = "opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0) scale(1)";
+          }, index * 40);
         } else {
-          card.classList.add("hidden");
+          card.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+          card.style.opacity = "0";
+          card.style.transform = "scale(0.95)";
+          setTimeout(() => {
+            card.classList.add("hidden");
+          }, 250);
         }
       });
+    });
+  });
+});
     });
   });
 }

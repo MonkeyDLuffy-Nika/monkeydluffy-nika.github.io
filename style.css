@@ -305,7 +305,13 @@ body {
   background-color: #2ecc71;
   border-radius: 50%;
   border: 3px solid #080a10;
-  box-shadow: 0 0 8px #2ecc71;
+  box-shadow: 0 0 10px #2ecc71;
+  animation: statusPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes statusPulse {
+  0%, 100% { box-shadow: 0 0 8px #2ecc71; transform: scale(1); }
+  50% { box-shadow: 0 0 16px #2ecc71, 0 0 24px rgba(46, 204, 113, 0.5); transform: scale(1.08); }
 }
 
 /* Profile Info */
@@ -360,6 +366,19 @@ body {
   margin-bottom: 16px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
+  animation: floatSpeech 4s ease-in-out infinite alternate;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.speech-status:hover {
+  border-color: var(--gold-300);
+  box-shadow: 0 6px 20px rgba(255, 183, 3, 0.25);
+  transform: translateY(-2px) scale(1.03);
+}
+
+@keyframes floatSpeech {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
 }
 
 .speech-emoji {
@@ -379,33 +398,61 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 14px;
+  gap: 16px;
   width: 100%;
-  max-width: 780px;
+  max-width: 680px;
 }
 
 .action-card {
-  flex: 1 1 220px;
-  max-width: 250px;
+  flex: 1 1 260px;
+  max-width: 320px;
   background: var(--bg-card);
   border: 1px solid var(--border-gold);
-  border-radius: 14px;
-  padding: 12px 18px;
+  border-radius: 16px;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-decoration: none;
   color: var(--text-main);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   cursor: pointer;
-  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease,
+              background 0.35s ease;
+}
+
+/* Liquid Light Sweep Shimmer on Hover */
+.action-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 235, 170, 0.22), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+
+.action-card:hover::before {
+  left: 160%;
 }
 
 .action-card:hover {
   background: var(--bg-card-hover);
   border-color: var(--gold-300);
-  box-shadow: 0 8px 24px rgba(255, 183, 3, 0.2);
-  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 183, 3, 0.3);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.action-card:active {
+  transform: scale(0.97) translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .action-icon {
@@ -528,20 +575,30 @@ body {
   align-items: center;
   gap: 8px;
   backdrop-filter: blur(8px);
-  transition: var(--transition-smooth);
+  cursor: default;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              color 0.3s ease;
 }
 
 .tech-badge i {
   color: var(--gold-400);
   font-size: 1rem;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .tech-badge:hover {
-  background: rgba(35, 42, 68, 0.9);
+  background: rgba(35, 42, 68, 0.95);
   border-color: var(--gold-300);
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 183, 3, 0.2);
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 8px 24px rgba(255, 183, 3, 0.25);
+}
+
+.tech-badge:hover i {
+  transform: scale(1.25) rotate(-8deg);
 }
 
 /* Filter Bar */
@@ -563,21 +620,34 @@ body {
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
-  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
   backdrop-filter: blur(6px);
 }
 
 .filter-btn:hover {
   color: var(--gold-200);
   border-color: var(--gold-300);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 183, 3, 0.2);
+}
+
+.filter-btn:active {
+  transform: scale(0.95);
 }
 
 .filter-btn.active {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(244, 162, 97, 0.25));
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(244, 162, 97, 0.28));
   border-color: var(--gold-400);
   color: #fff;
   font-weight: 600;
-  box-shadow: 0 0 16px rgba(255, 183, 3, 0.3);
+  box-shadow: 0 0 18px rgba(255, 183, 3, 0.35);
+  transform: translateY(-1px);
 }
 
 /* Projects Grid */
@@ -694,17 +764,21 @@ body {
   text-decoration: none;
   font-size: 0.88rem;
   font-weight: 600;
-  transition: var(--transition-smooth);
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease;
 }
 
 .repo-btn i.fa-arrow-right {
   font-size: 0.75rem;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .repo-btn:hover {
   color: #fff;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  background: rgba(255, 215, 0, 0.12);
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  transform: translateX(3px);
 }
 
 .repo-btn:hover i.fa-arrow-right {
